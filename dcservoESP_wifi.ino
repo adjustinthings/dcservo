@@ -59,16 +59,16 @@ void toggle() {
 const int QEM [16] = {0,-1,1,2,1,0,2,-1,-1,2,0,1,2,1,-1,0};               // Quadrature Encoder Matrix
 static unsigned char New, Old;
 
-
-void encoderInt() { // handle pin change interrupt for D2
+//Added for newer arduino esp8266 core
+ICACHE_RAM_ATTR void encoderInt() { // handle pin change interrupt for D2
   Old = New;
   //New = PIND & 3; //(PINB & 1 )+ ((PIND & 4) >> 1); //   Mauro Manco
   New = digitalRead(encoder0PinA)*2 + digitalRead(encoder0PinB);
   encoder0Pos+= QEM [Old * 4 + New];
 }
 
-
-void countStep(){ if (digitalRead(DIR)== HIGH) target1--;else target1++;
+//Added for newer arduino esp8266 core
+ICACHE_RAM_ATTR void countStep(){ if (digitalRead(DIR)== HIGH) target1--;else target1++;
 } // pin A0 represents direction == PF7 en Pro Micro
 
 
